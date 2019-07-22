@@ -1,0 +1,18 @@
+<section>
+  <h1>Books List</h1>
+  <ul *ngIf="bookList.length">
+    <li *ngFor="let book of bookList" class="book-list__item">
+      <h2 class="book-list__title">{{ book.title }}</h2>
+      <div class="book-list__description">{{ book.description }}</div>
+      <div class="book-list__button">
+        <button (click)="editBook(book)" class="">Edit</button>
+        <button (click)="deleteBook(book)" class="">
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+  <ul *ngIf="!bookList.length">
+    <li>No books</li>
+  </ul>
+</section>

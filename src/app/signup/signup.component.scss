@@ -1,0 +1,31 @@
+form{
+ width: 50%;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: flex-start;
+ background-color: #cccccc;
+ padding: 1rem;
+ margin-top: 20px;
+}
+
+.form-group{
+ width: 100%;
+ margin: 10px 0;
+ display: flex;
+ 
+ label{
+  margin: 0 1rem;
+  min-width: 30%;
+ }
+
+}
+
+section{
+ width: 100vw;
+ padding: 0.5rem;
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+}
