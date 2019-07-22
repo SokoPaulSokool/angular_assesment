@@ -19,9 +19,11 @@ export class SignupComponent implements OnInit {
 
   submitForm(form: NgForm) {
     if (form.valid) {
-      this.dataService.loginIn(form.value).subscribe(data => {
-        console.log(data);
-        this.router.navigate(['/login']);
+      this.dataService.signUp(form.value).subscribe((data: any) => {
+        if (data.success) {
+          this.router.navigate(['/login']);
+
+        }
       });
     }
   }

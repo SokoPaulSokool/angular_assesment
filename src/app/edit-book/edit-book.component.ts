@@ -22,11 +22,17 @@ export class EditBookComponent implements OnInit {
   }
 
   submitForm(form: NgForm) {
-    console.log(form.value);
     if (form.valid) {
-      this.dataService.editBookBook(form.value).subscribe(result => {
-        this.router.navigate(['/books']);
-      });
+      this.dataService
+        .editBookBook({ ...form.value, id: this.book.id })
+        .subscribe((result: any) => {
+          if (result.success) {
+            this.dataService.getBooks().subscribe(res => {
+              this.dataService.updateList(res);
+              this.router.navigate(['/books']);
+            });
+          }
+        });
     }
   }
 }

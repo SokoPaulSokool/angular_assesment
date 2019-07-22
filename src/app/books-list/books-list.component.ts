@@ -19,26 +19,28 @@ export class BooksListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dataService.getBooks().subscribe((res: any) => {
+      this.bookList = res;
+    });
     this.bookList = this.dataService.bookList;
     this.dataService.bookList$.subscribe((books: any) => {
-      console.log(books);
       this.bookList = books;
-      console.log(this.bookList);
     });
-    // this.bookList.concat(this.dataService.bookList);
   }
 
   editBook(book) {
     this.dataService.bookToEdit = book;
-    this.dataService.editBookBook(book).subscribe(result => {
-      this.router.navigate(['/editBook']);
-    });
+    this.router.navigate(['/editBook']);
   }
   deleteBook(book) {
     this.dataService.bookToEdit = book;
-    this.dataService.deleteBook(book).subscribe(result => {
-      console.log(result);
-      this.router.navigate(['/books']);
+    this.dataService.deleteBook(book).subscribe((result: any) => {
+      if (result.success) {
+        this.dataService.getBooks().subscribe(res => {
+          this.dataService.updateList(res);
+          this.router.navigate(['/books']);
+        });
+      }
     });
   }
 }
