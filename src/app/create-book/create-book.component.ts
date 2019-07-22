@@ -18,10 +18,13 @@ export class CreateBookComponent implements OnInit {
   ngOnInit() {}
 
   submitForm(form: NgForm) {
-    console.log(form.value);
-
-    this.dataService.createBook(form.value).subscribe(result => {
-      this.router.navigate(['/books']);
+    this.dataService.createBook(form.value).subscribe((result: any) => {
+      if (result.success) {
+        this.dataService.getBooks().subscribe(res => {
+          this.dataService.updateList(res);
+          this.router.navigate(['/books']);
+        });
+      }
     });
   }
 }

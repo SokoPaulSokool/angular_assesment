@@ -10,6 +10,7 @@ import { DataServiceService } from '../data-service.service';
 })
 export class LoginComponent implements OnInit {
   model = { name: '', email: '', password: '' };
+  message = '';
   constructor(
     private router: Router,
     private dataService: DataServiceService
@@ -19,9 +20,12 @@ export class LoginComponent implements OnInit {
 
   submitForm(form: NgForm) {
     if (form.valid) {
-      this.dataService.loginIn(form.value).subscribe(data => {
-        console.log(data);
-        this.router.navigate(['/books']);
+      this.dataService.loginIn(form.value).subscribe((data: any) => {
+        if (data.success) {
+          this.router.navigate(['/books']);
+        } else {
+          this.message = data.message;
+        }
       });
     }
   }

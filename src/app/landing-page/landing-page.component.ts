@@ -15,7 +15,6 @@ export class LandingPageComponent implements OnInit {
 
 
 signUp(){
-  console.log("clicked");
 this.router.navigate(["/signup"]);
 }
 }

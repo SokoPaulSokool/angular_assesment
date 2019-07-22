@@ -21,48 +21,31 @@ export class DataServiceService {
   }
 
   signUp(userData) {
-    const url = this.baseUrl + '/signUp';
+    const url = this.baseUrl + '/users/signUp';
     this.user = userData;
     return this.http.post(url, userData);
   }
 
   loginIn(userData) {
-    const url = this.baseUrl + '/loginIn';
+    const url = this.baseUrl + '/users/loginIn';
     this.user = userData;
     return this.http.post(url, userData);
   }
 
   createBook(bookData) {
-    this.bookList.push({ ...bookData, id: this.bookList.length + 1 });
-    console.log(this.bookList);
-    this.updateList(this.bookList);
-    const url = this.baseUrl + '/createBook';
+    const url = this.baseUrl + '/books/createBook';
     return this.http.post(url, bookData);
   }
 
   editBookBook(userData) {
-    const url = this.baseUrl + '/editBooks';
-    this.bookList = this.bookList.map(book => {
-      if (book.id === userData.id) {
-        return userData;
-      }
-      return book;
-    });
-    this.updateList(this.bookList);
-    return this.http.post(url, userData);
+    const url = this.baseUrl + '/books/editBook';
+    return this.http.put(url, userData);
   }
   deleteBook(userData) {
-    const url = this.baseUrl + '/deleteBook';
-    this.bookList = this.bookList.filter(book => {
-      if (book.id === userData.id) {
-        return false;
-      }
-      return true;
-    });
-    this.updateList(this.bookList);
+    const url = this.baseUrl + '/books/deleteBook';
     return this.http.post(url, userData);
   }
-  getBooks(userData) {
+  getBooks() {
     const url = this.baseUrl + '/books';
     return this.http.get(url);
   }
