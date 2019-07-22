@@ -1,0 +1,42 @@
+<section>
+  <h2>LOGIN</h2>
+
+  <form id="formId" (ngSubmit)="submitForm(refForm)" #refForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        required
+        type="email"
+        [(ngModel)]="model.email"
+        name="email"
+        type="text"
+        class="form-control"
+        id="email"
+        #email="ngModel" 
+      />
+      <div *ngIf="refForm.submitted && email.invalid" class="invalid-feedback">
+        <div *ngIf="email.errors.required">Email is required</div>
+        <div *ngIf="email.errors.email">
+          Email must be a valid email address
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="age">Password</label>
+      <input
+        required
+        type="text"
+        type="password"
+        class="form-control"
+        id="password"
+        [(ngModel)]="model.password"
+        name="password"
+        #password="ngModel" 
+      />
+       <div *ngIf="refForm.submitted && password.invalid" class="invalid-feedback">
+        <div *ngIf="password.errors.required">password is required</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</section>

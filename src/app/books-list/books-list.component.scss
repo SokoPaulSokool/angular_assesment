@@ -1,0 +1,40 @@
+.book-list__item {
+  width: 80%;
+  height: 30px;
+  background-color: #cccccc;
+  padding: 2rem;
+  list-style: none;
+  margin: 0.5rem;
+  position: relative;
+}
+
+.book-list__button {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+}
+
+.book-list__description {
+}
+
+.book-list__title {
+  text-transform: uppercase;
+}
+
+ul {
+  width: 100vw;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+section {
+  width: 100vw;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,62 @@
+<section>
+  <h2>Signup</h2>
+
+  <form id="formId" (ngSubmit)="submitForm(refForm)" #refForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        required
+        [(ngModel)]="model.name"
+        type="text"
+        name="name"
+        class="form-control"
+        id="name"
+         #name="ngModel"
+      />
+       <div
+        *ngIf="refForm.submitted && password.invalid"
+        class="invalid-feedback"
+      >
+        <div *ngIf="name.errors.required">name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        required
+        [(ngModel)]="model.email"
+        type="email"
+        name="email"
+        class="form-control"
+        id="email"
+        #email="ngModel"
+      />
+      <div *ngIf="refForm.submitted && email.invalid" class="invalid-feedback">
+        <div *ngIf="email.errors.required">Email is required</div>
+        <div *ngIf="email.errors.email">
+          Email must be a valid email address
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        required
+        [(ngModel)]="model.password"
+        type="password"
+        name="password"
+        class="form-control"
+        id="password"
+        #password="ngModel"
+      />
+      <div
+        *ngIf="refForm.submitted && password.invalid"
+        class="invalid-feedback"
+      >
+        <div *ngIf="password.errors.required">password is required</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</section>
