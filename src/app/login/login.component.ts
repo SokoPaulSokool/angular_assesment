@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       this.dataService.loginIn(form.value).subscribe((data: any) => {
         if (data.success) {
+          this.dataService.user= data.data;
           this.router.navigate(['/books']);
         } else {
           this.message = data.message;

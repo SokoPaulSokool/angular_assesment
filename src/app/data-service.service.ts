@@ -22,31 +22,29 @@ export class DataServiceService {
 
   signUp(userData) {
     const url = this.baseUrl + '/users/signUp';
-    this.user = userData;
     return this.http.post(url, userData);
   }
 
   loginIn(userData) {
     const url = this.baseUrl + '/users/loginIn';
-    this.user = userData;
     return this.http.post(url, userData);
   }
 
   createBook(bookData) {
-    const url = this.baseUrl + '/books/createBook';
-    return this.http.post(url, bookData);
+    const url = this.baseUrl + `/books?userId=${this.user.id}`;
+    return this.http.post(url, { ...bookData, userId: this.user.id });
   }
 
-  editBookBook(userData) {
-    const url = this.baseUrl + '/books/editBook';
-    return this.http.put(url, userData);
+  editBookBook(bookData) {
+    const url = this.baseUrl + `/books/${bookData.id}?userId=${this.user.id}`;
+    return this.http.put(url, { ...bookData, userId: this.user.id });
   }
-  deleteBook(userData) {
-    const url = this.baseUrl + '/books/deleteBook';
-    return this.http.post(url, userData);
+  deleteBook(bookData) {
+    const url = this.baseUrl + `/books/${bookData.id}?userId=${this.user.id}`;
+    return this.http.delete(url, { ...bookData, userId: this.user.id });
   }
   getBooks() {
-    const url = this.baseUrl + '/books';
-    return this.http.get(url);
+    const url = this.baseUrl + `/books?userId=${this.user.id}`;
+    return this.http.get(url); 
   }
 }

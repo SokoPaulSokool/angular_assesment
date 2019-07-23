@@ -1,5 +1,5 @@
 <section>
-  <h1>Books List</h1>
+  <h1>{{dataService.user.name}}'s Books List</h1>
   <ul *ngIf="bookList.length">
     <li *ngFor="let book of bookList" class="book-list__item">
       <h2 class="book-list__title">{{ book.title }}</h2>
