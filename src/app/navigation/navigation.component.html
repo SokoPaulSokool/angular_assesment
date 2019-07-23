@@ -1,5 +1,9 @@
 <nav>
- <h1 class="nav__title">Our Books</h1>
+  <h1 class="nav__title" (click)="home()">Our Books</h1>
 
- <button (click)="createBook()" >Create Book</button>
+  <div>
+    <button (click)="createBook()">Create Book</button>
+    <button *ngIf="!dataService.user" (click)="logIn()">Log In</button>
+    <button *ngIf="dataService.user"  (click)="logOut()">Log Out</button>
+  </div>
 </nav>

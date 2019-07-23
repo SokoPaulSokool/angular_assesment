@@ -22,11 +22,18 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       this.dataService.loginIn(form.value).subscribe((data: any) => {
         if (data.success) {
+          this.dataService.user = data.data;
           this.router.navigate(['/books']);
+        } else if (data.error) {
+          this.router.navigate(['/error']);
         } else {
           this.message = data.message;
         }
       });
     }
+  }
+
+  signUp() {
+    this.router.navigate(['/signup']);
   }
 }

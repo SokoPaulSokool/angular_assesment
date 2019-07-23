@@ -17,13 +17,18 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
+  logIn(){
+    this.router.navigate(['/login']);
+  }
+
   submitForm(form: NgForm) {
     if (form.valid) {
       this.dataService.signUp(form.value).subscribe((data: any) => {
         if (data.success) {
           this.router.navigate(['/login']);
-
-        }
+        } else if (data.error) {
+          this.router.navigate(['/error']);
+        } 
       });
     }
   }

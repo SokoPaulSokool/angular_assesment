@@ -7,6 +7,7 @@ import { BooksListComponent } from './books-list/books-list.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { CanActivateRouteGuard } from './can-activate-route-guard.service';
+import { ErrorPageComponent } from "./error-page/error-page.component";
 
 const routes: Routes = [
   { component: LandingPageComponent, path: '' },
@@ -26,11 +27,15 @@ const routes: Routes = [
     component: CreateBookComponent,
     path: 'createBook',
     canActivate: [CanActivateRouteGuard]
+  },
+  {
+    component: ErrorPageComponent,
+    path: 'error'
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class AppRoutingModule {}

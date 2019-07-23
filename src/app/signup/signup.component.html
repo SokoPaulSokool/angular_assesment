@@ -14,7 +14,7 @@
          #name="ngModel"
       />
        <div
-        *ngIf="refForm.submitted && password.invalid"
+        *ngIf="refForm.submitted && name.invalid"
         class="invalid-feedback"
       >
         <div *ngIf="name.errors.required">name is required</div>
@@ -58,5 +58,6 @@
       </div>
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-success" (click)="logIn()" >Login</button>
   </form>
 </section>

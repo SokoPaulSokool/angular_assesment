@@ -13,6 +13,7 @@ import { CreateBookComponent } from './create-book/create-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CanActivateRouteGuard } from "./can-activate-route-guard.service";
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CanActivateRouteGuard } from "./can-activate-route-guard.service";
     LoginComponent,
     BooksListComponent,
     CreateBookComponent,
-    EditBookComponent
+    EditBookComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

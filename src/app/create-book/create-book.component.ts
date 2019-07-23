@@ -24,6 +24,8 @@ export class CreateBookComponent implements OnInit {
           this.dataService.updateList(res);
           this.router.navigate(['/books']);
         });
+      } else if (result.error) {
+        this.router.navigate(['/error']);
       }
     });
   }

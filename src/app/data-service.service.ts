@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Subject, throwError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,31 +23,39 @@ export class DataServiceService {
 
   signUp(userData) {
     const url = this.baseUrl + '/users/signUp';
-    this.user = userData;
-    return this.http.post(url, userData);
+    return this.http.post(url, userData).pipe(catchError(this.errorHandler));
   }
 
   loginIn(userData) {
     const url = this.baseUrl + '/users/loginIn';
-    this.user = userData;
-    return this.http.post(url, userData);
+    return this.http.post(url, userData).pipe(catchError(this.errorHandler));
   }
 
   createBook(bookData) {
-    const url = this.baseUrl + '/books/createBook';
-    return this.http.post(url, bookData);
+    const url = this.baseUrl + `/books?userId=${this.user.id}`;
+    return this.http
+      .post(url, { ...bookData, userId: this.user.id })
+      .pipe(catchError(this.errorHandler));
   }
 
-  editBookBook(userData) {
-    const url = this.baseUrl + '/books/editBook';
-    return this.http.put(url, userData);
+  editBookBook(bookData) {
+    const url = this.baseUrl + `/books/${bookData.id}?userId=${this.user.id}`;
+    return this.http
+      .put(url, { ...bookData, userId: this.user.id })
+      .pipe(catchError(this.errorHandler));
   }
-  deleteBook(userData) {
-    const url = this.baseUrl + '/books/deleteBook';
-    return this.http.post(url, userData);
+  deleteBook(bookData) {
+    const url = this.baseUrl + `/books/${bookData.id}?userId=${this.user.id}`;
+    return this.http
+      .delete(url, { ...bookData, userId: this.user.id })
+      .pipe(catchError(this.errorHandler));
   }
   getBooks() {
-    const url = this.baseUrl + '/books';
-    return this.http.get(url);
+    const url = this.baseUrl + `/books?userId=${this.user.id}`;
+    return this.http.get(url).pipe(catchError(this.errorHandler));
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    return of({ error: 'Something bad happened; please try again later.' });
   }
 }
