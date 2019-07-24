@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve & yarn server",
+    "start": "yarn dev & yarn server",
+    "dev": "ng serve --host 0.0.0.0", 
     "server": "nodemon ./server/index.js",
     "build": "ng build",
+    "docker:mongo": "docker run --rm -d --name my-mongo -p 27017:27017  mongo",
+    "docker:run": "yarn docker:mongo && docker run --rm --name sokool-assess -p 80:4200 -p 8080:8080 -v $(pwd):/var/www -w \"/var/www\" --link my-mongo:mongo  node npm run start ",
+    "docker:rm": "docker stop sokool-assess my-mongo",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,7 +36,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
-    "@angular/cli": "~8.0.2",
+    "@angular/cli": "^8.1.2",
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.0.0",
     "@types/jasmine": "~3.3.8",

@@ -11,14 +11,16 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-var users = require('./users.js');
+var users = require('./users.js');  
 var books = require('./books.js');
-
-var connectionString = 'mongodb://127.0.0.1:27017';
-
+ 
+// var connectionString = 'mongodb://127.0.0.1:27017'; 
+var connectionString = 'mongodb://mongo:27017'; 
+ 
 mongoose.Promise = global.Promise;
 mongoose.set('useFindAndModify', false);
-mongoose.connect(
+setTimeout(() => {
+  mongoose.connect(
   connectionString + '/books',
   { useNewUrlParser: true },
   function(err) {
@@ -30,6 +32,8 @@ mongoose.connect(
     }
   }
 );
+}, 5000);
+
 
 mongoose.connection.once('open', async () => {
   app.use('/users', users);
