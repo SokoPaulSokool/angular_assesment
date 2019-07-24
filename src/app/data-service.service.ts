@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataServiceService {
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://127.0.0.1:8080';
 
   bookList = [];
   bookList$ = new Subject();
